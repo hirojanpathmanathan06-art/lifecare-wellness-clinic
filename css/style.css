@@ -316,3 +316,4 @@ body.logged-in .guest-only { display: none; }
   .card-link { transition: none; }
   .card-link:hover { transform: none; }
 }
+[hidden] { display: none !important; }
