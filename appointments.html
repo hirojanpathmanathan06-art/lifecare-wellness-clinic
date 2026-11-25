@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Appointments and Staff Schedules | LifeCare Wellness Clinic</title>
+  <meta name="description" content="See when LifeCare Wellness Clinic doctors and nurses are available and book an appointment with a general physician or specialist online.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 42 42'%3E%3Ccircle cx='21' cy='21' r='20' fill='%230d6e9e'/%3E%3Cpath d='M17 9h8v8h8v8h-8v8h-8v-8H9v-8h8z' fill='%23fff'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="logo"><svg viewBox="0 0 42 42" aria-hidden="true" focusable="false"><circle cx="21" cy="21" r="20" fill="#0d6e9e"/><path d="M17 9h8v8h8v8h-8v8h-8v-8H9v-8h8z" fill="#fff"/><circle cx="21" cy="21" r="20" fill="none" stroke="#13807a" stroke-width="2"/></svg><span>LifeCare<small>Wellness Clinic</small></span></a>
+      <button type="button" class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="mainNav">Menu</button>
+      <nav class="main-nav" id="mainNav" aria-label="Main menu">
+        <ul><li><a href="index.html">Home</a></li><li><a href="patients.html">Patients</a></li><li><a href="appointments.html" class="active" aria-current="page">Appointments</a></li><li><a href="rooms.html">Rooms</a></li><li><a href="billing.html">Billing</a></li><li><a href="reception.html">Reception</a></li><li><a href="contact.html">Contact</a></li><li><a href="login.html" class="nav-login" id="navLogin">Staff Login</a></li></ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+<section class="page-banner"><div class="container"><p class="breadcrumb"><a href="index.html">Home</a> / Appointments &amp; Staff Schedules</p><h1>Appointments &amp; Staff Schedules</h1><p>View doctor and nurse schedules and book an appointment with an available doctor or specialist.</p></div></section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-head">
+          <h2>Doctor and Nurse Schedules</h2>
+          <div class="form-group" style="margin:0;min-width:200px"><label for="roleFilter">Show</label>
+            <select id="roleFilter"><option value="all">All staff</option><option value="Doctor">Doctors only</option><option value="Nurse">Nurses only</option></select></div>
+        </div>
+        <div class="table-wrap">
+          <table class="data-table" id="scheduleTable">
+            <thead><tr><th>Name</th><th>Role</th><th>Speciality</th><th>Working days</th><th>Hours</th><th>Room / Ward</th></tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-light">
+      <div class="container two-col">
+        <div class="panel">
+          <h2>Book an Appointment</h2>
+          <p class="muted">Fields marked <span class="required">*</span> are required.</p>
+          <form id="appointmentForm" novalidate>
+            <div class="form-row"><div class="form-group"><label for="aPatient">Patient name <span class="required" aria-hidden="true">*</span></label><input type="text" id="aPatient" name="aPatient" required aria-describedby="aPatientError" autocomplete="name"><span class="error-text" id="aPatientError"></span></div><div class="form-group"><label for="aPhone">Phone number <span class="required" aria-hidden="true">*</span></label><input type="tel" id="aPhone" name="aPhone" required aria-describedby="aPhoneError" autocomplete="tel" placeholder="0771234567"><span class="error-text" id="aPhoneError"></span></div></div>
+            <div class="form-group"><label for="aDoctor">Doctor <span class="required" aria-hidden="true">*</span></label><select id="aDoctor" name="aDoctor" required aria-describedby="aDoctorError"><option value="">Select a doctor</option></select><span class="error-text" id="aDoctorError"></span></div>
+            <p class="hint" id="doctorDays" aria-live="polite"></p>
+            <div class="form-row"><div class="form-group"><label for="aDate">Date <span class="required" aria-hidden="true">*</span></label><input type="date" id="aDate" name="aDate" required aria-describedby="aDateError"><span class="error-text" id="aDateError"></span></div><div class="form-group"><label for="aTime">Time <span class="required" aria-hidden="true">*</span></label><select id="aTime" name="aTime" required aria-describedby="aTimeError"><option value="">Select a doctor and date first</option></select><span class="error-text" id="aTimeError"></span></div></div>
+            <div class="form-group"><label for="aReason">Reason for visit</label><textarea id="aReason" name="aReason" aria-describedby="aReasonError" placeholder="e.g. Fever for three days"></textarea><span class="error-text" id="aReasonError"></span></div>
+            <button type="submit" class="btn">Book Appointment</button>
+            <p id="appointmentMsg" class="message" role="status" aria-live="polite"></p>
+          </form>
+        </div>
+        <aside class="panel side-info">
+          <h3>How booking works</h3>
+          <ol>
+            <li>Choose a doctor to see the days they work.</li>
+            <li>Pick a date and one of the free time slots.</li>
+            <li>Keep your reference number for the visit.</li>
+          </ol>
+          <h3>On the day</h3>
+          <p>Please arrive 15 minutes early and bring your ID and any previous medical reports.</p>
+          <h3>Need to cancel?</h3>
+          <p>Call reception on +94 11 245 6789 at least 24 hours before your appointment.</p>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <h2>Booked Appointments</h2>
+        <div class="lock-box guest-only"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg><p><strong>Staff only.</strong> The appointment list shows patient details. Please <a href="login.html">log in with a staff account</a> to continue.</p></div>
+        <div class="staff-only">
+          <div class="inline-form">
+            <div class="form-group"><label for="apptFilterDate">Show appointments on</label><input type="date" id="apptFilterDate"></div>
+            <button type="button" class="btn btn-secondary" id="apptShowAll">Show all dates</button>
+          </div>
+          <div class="table-wrap">
+            <table class="data-table" id="appointmentTable">
+              <thead><tr><th>Ref</th><th>Date</th><th>Time</th><th>Patient</th><th>Phone</th><th>Doctor</th><th>Reason</th><th>Status</th><th>Action</th></tr></thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div>
+        <h2>LifeCare Wellness Clinic</h2>
+        <p>A private medical clinic offering general check-ups, specialist consultations and wellness programmes for the whole family.</p>
+      </div>
+      <div>
+        <h2>Quick Links</h2>
+        <ul>
+          <li><a href="appointments.html">Book an appointment</a></li>
+          <li><a href="patients.html">Patient registration</a></li>
+          <li><a href="rooms.html">Room availability</a></li>
+          <li><a href="contact.html">Contact us</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Contact</h2>
+        <ul>
+          <li>No. 45, Duplication Road, Colombo 04</li>
+          <li>Phone: +94 11 245 6789</li>
+          <li>Email: info@lifecarewellness.lk</li>
+          <li>Mon &ndash; Fri: 7:00 AM &ndash; 9:00 PM</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container">
+        <p>&copy; <span id="year">2026</span> LifeCare Wellness Clinic. All rights reserved. Website by PixelWorks.</p>
+        <p>Academic project for HND Unit 13. LifeCare Wellness Clinic is a fictional clinic.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/script.js"></script>
+</body>
+</html>

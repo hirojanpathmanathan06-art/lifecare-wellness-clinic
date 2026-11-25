@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Staff Login | LifeCare Wellness Clinic</title>
+  <meta name="description" content="Secure login for LifeCare Wellness Clinic staff to access patient records, schedules, billing and reception tools.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 42 42'%3E%3Ccircle cx='21' cy='21' r='20' fill='%230d6e9e'/%3E%3Cpath d='M17 9h8v8h8v8h-8v8h-8v-8H9v-8h8z' fill='%23fff'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="logo"><svg viewBox="0 0 42 42" aria-hidden="true" focusable="false"><circle cx="21" cy="21" r="20" fill="#0d6e9e"/><path d="M17 9h8v8h8v8h-8v8h-8v-8H9v-8h8z" fill="#fff"/><circle cx="21" cy="21" r="20" fill="none" stroke="#13807a" stroke-width="2"/></svg><span>LifeCare<small>Wellness Clinic</small></span></a>
+      <button type="button" class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="mainNav">Menu</button>
+      <nav class="main-nav" id="mainNav" aria-label="Main menu">
+        <ul><li><a href="index.html">Home</a></li><li><a href="patients.html">Patients</a></li><li><a href="appointments.html">Appointments</a></li><li><a href="rooms.html">Rooms</a></li><li><a href="billing.html">Billing</a></li><li><a href="reception.html">Reception</a></li><li><a href="contact.html">Contact</a></li><li><a href="login.html" class="nav-login active" id="navLogin" aria-current="page">Staff Login</a></li></ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+<section class="page-banner"><div class="container"><p class="breadcrumb"><a href="index.html">Home</a> / Staff Login</p><h1>Staff Login</h1><p>Log in to access patient records, room scheduling, billing and reception tools.</p></div></section>
+
+    <section class="section">
+      <div class="container">
+        <div class="panel login-panel guest-only">
+          <h2>Staff Login</h2>
+          <p class="muted">This area is for authorised LifeCare staff only.</p>
+          <form id="loginForm" novalidate>
+            <div class="form-group"><label for="username">Username <span class="required" aria-hidden="true">*</span></label><input type="text" id="username" name="username" required aria-describedby="usernameError" autocomplete="username"><span class="error-text" id="usernameError"></span></div>
+            <div class="form-group"><label for="password">Password <span class="required" aria-hidden="true">*</span></label><input type="password" id="password" name="password" required aria-describedby="passwordError" autocomplete="current-password"><span class="error-text" id="passwordError"></span></div>
+            <div class="form-group"><label class="check-row" for="showPassword"><input type="checkbox" id="showPassword"> Show password</label></div>
+            <button type="submit" class="btn">Log In</button>
+            <p id="loginMsg" class="message" role="alert"></p>
+          </form>
+          <p class="demo-note">Demo account for this prototype: username <strong>staff</strong>, password <strong>LifeCare@2026</strong></p>
+        </div>
+        <div class="panel login-panel staff-only">
+          <h2>You are logged in</h2>
+          <p id="loggedInMsg" class="message" role="status" aria-live="polite"></p>
+          <p>Welcome, <strong class="staff-name"></strong>. You can now use the staff areas:</p>
+          <ul class="staff-links">
+            <li><a href="patients.html">Patient records</a></li>
+            <li><a href="appointments.html">Booked appointments</a></li>
+            <li><a href="rooms.html">Room scheduling</a></li>
+            <li><a href="billing.html">Invoicing and billing</a></li>
+            <li><a href="reception.html">Reception desk</a></li>
+          </ul>
+          <button type="button" class="btn btn-danger" id="logoutBtn">Log Out</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div>
+        <h2>LifeCare Wellness Clinic</h2>
+        <p>A private medical clinic offering general check-ups, specialist consultations and wellness programmes for the whole family.</p>
+      </div>
+      <div>
+        <h2>Quick Links</h2>
+        <ul>
+          <li><a href="appointments.html">Book an appointment</a></li>
+          <li><a href="patients.html">Patient registration</a></li>
+          <li><a href="rooms.html">Room availability</a></li>
+          <li><a href="contact.html">Contact us</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Contact</h2>
+        <ul>
+          <li>No. 45, Duplication Road, Colombo 04</li>
+          <li>Phone: +94 11 245 6789</li>
+          <li>Email: info@lifecarewellness.lk</li>
+          <li>Mon &ndash; Fri: 7:00 AM &ndash; 9:00 PM</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container">
+        <p>&copy; <span id="year">2026</span> LifeCare Wellness Clinic. All rights reserved. Website by PixelWorks.</p>
+        <p>Academic project for HND Unit 13. LifeCare Wellness Clinic is a fictional clinic.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/script.js"></script>
+</body>
+</html>

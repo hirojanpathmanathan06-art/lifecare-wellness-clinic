@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Invoicing and Billing | LifeCare Wellness Clinic</title>
+  <meta name="description" content="Billing at LifeCare Wellness Clinic: invoices for consultations, tests and procedures, payment tracking and outstanding balances.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 42 42'%3E%3Ccircle cx='21' cy='21' r='20' fill='%230d6e9e'/%3E%3Cpath d='M17 9h8v8h8v8h-8v8h-8v-8H9v-8h8z' fill='%23fff'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="logo"><svg viewBox="0 0 42 42" aria-hidden="true" focusable="false"><circle cx="21" cy="21" r="20" fill="#0d6e9e"/><path d="M17 9h8v8h8v8h-8v8h-8v-8H9v-8h8z" fill="#fff"/><circle cx="21" cy="21" r="20" fill="none" stroke="#13807a" stroke-width="2"/></svg><span>LifeCare<small>Wellness Clinic</small></span></a>
+      <button type="button" class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="mainNav">Menu</button>
+      <nav class="main-nav" id="mainNav" aria-label="Main menu">
+        <ul><li><a href="index.html">Home</a></li><li><a href="patients.html">Patients</a></li><li><a href="appointments.html">Appointments</a></li><li><a href="rooms.html">Rooms</a></li><li><a href="billing.html" class="active" aria-current="page">Billing</a></li><li><a href="reception.html">Reception</a></li><li><a href="contact.html">Contact</a></li><li><a href="login.html" class="nav-login" id="navLogin">Staff Login</a></li></ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+<section class="page-banner"><div class="container"><p class="breadcrumb"><a href="index.html">Home</a> / Invoicing &amp; Billing</p><h1>Invoicing &amp; Billing</h1><p>Generate invoices for consultations, treatments and procedures, and track payments and outstanding balances.</p></div></section>
+
+    <section class="section">
+      <div class="container">
+        <div class="lock-box guest-only"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg><p><strong>Staff only.</strong> Invoices and payments are only available to billing and reception staff. Please <a href="login.html">log in with a staff account</a> to continue.</p></div>
+        <div class="staff-only">
+          <div class="summary">
+            <div class="summary-box"><p class="label">Total billed</p><p class="value" id="sumBilled">LKR 0</p></div>
+            <div class="summary-box"><p class="label">Payments received</p><p class="value" id="sumReceived">LKR 0</p></div>
+            <div class="summary-box"><p class="label">Outstanding balance</p><p class="value" id="sumOutstanding">LKR 0</p></div>
+            <div class="summary-box"><p class="label">Unpaid invoices</p><p class="value" id="sumUnpaid">0</p></div>
+          </div>
+          <div class="two-col even">
+            <div class="panel">
+              <h2>Create Invoice</h2>
+              <form id="invoiceForm" novalidate>
+                <div class="form-row"><div class="form-group"><label for="iPatient">Patient <span class="required" aria-hidden="true">*</span></label><select id="iPatient" name="iPatient" required aria-describedby="iPatientError"><option value="">Select a patient</option></select><span class="error-text" id="iPatientError"></span></div><div class="form-group"><label for="iDate">Invoice date <span class="required" aria-hidden="true">*</span></label><input type="date" id="iDate" name="iDate" required aria-describedby="iDateError"><span class="error-text" id="iDateError"></span></div></div>
+                <fieldset>
+                  <legend>Services <span class="required" aria-hidden="true">*</span></legend>
+                  <ul class="checkbox-list" id="serviceList"></ul>
+                  <span class="error-text" id="serviceError" aria-live="polite"></span>
+                </fieldset>
+                <div class="form-row"><div class="form-group"><label for="iPaid">Amount paid now (LKR)</label><input type="number" id="iPaid" name="iPaid" aria-describedby="iPaidError" min="0" step="100" placeholder="0"><span class="error-text" id="iPaidError"></span></div><div class="form-group"><label for="iMethod">Payment method</label><select id="iMethod" name="iMethod" aria-describedby="iMethodError"><option>Cash</option><option>Card</option><option>Online transfer</option></select><span class="error-text" id="iMethodError"></span></div></div>
+                <div class="total-box" aria-live="polite"><span>Total: <span id="iTotal">LKR 0</span></span><span>Balance: <span id="iBalance">LKR 0</span></span></div>
+                <button type="submit" class="btn">Generate Invoice</button>
+                <p id="invoiceMsg" class="message" role="status" aria-live="polite"></p>
+              </form>
+            </div>
+            <div class="panel">
+              <h2>Record a Payment</h2>
+              <form id="paymentForm" novalidate>
+                <div class="form-group"><label for="payInvoice">Invoice <span class="required" aria-hidden="true">*</span></label><select id="payInvoice" name="payInvoice" required aria-describedby="payInvoiceError"><option value="">Select an invoice</option></select><span class="error-text" id="payInvoiceError"></span></div>
+                <div class="form-row"><div class="form-group"><label for="payAmount">Amount (LKR) <span class="required" aria-hidden="true">*</span></label><input type="number" id="payAmount" name="payAmount" required aria-describedby="payAmountError" min="1" step="100"><span class="error-text" id="payAmountError"></span></div><div class="form-group"><label for="payMethod">Payment method</label><select id="payMethod" name="payMethod" aria-describedby="payMethodError"><option>Cash</option><option>Card</option><option>Online transfer</option></select><span class="error-text" id="payMethodError"></span></div></div>
+                <button type="submit" class="btn">Record Payment</button>
+                <p id="paymentMsg" class="message" role="status" aria-live="polite"></p>
+              </form>
+            </div>
+          </div>
+
+          <div class="section-head" style="margin-top:30px">
+            <h2>Invoices</h2>
+            <div class="form-group" style="margin:0;min-width:200px"><label for="invoiceFilter">Show</label>
+              <select id="invoiceFilter"><option value="all">All invoices</option><option>Paid</option><option>Partially paid</option><option>Unpaid</option></select></div>
+          </div>
+          <div class="table-wrap">
+            <table class="data-table" id="invoiceTable">
+              <thead><tr><th>Invoice</th><th>Date</th><th>Patient</th><th class="num">Total</th><th class="num">Paid</th><th class="num">Balance</th><th>Status</th><th>Action</th></tr></thead>
+              <tbody></tbody>
+            </table>
+          </div>
+          <div id="invoiceView" class="invoice" hidden></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div>
+        <h2>LifeCare Wellness Clinic</h2>
+        <p>A private medical clinic offering general check-ups, specialist consultations and wellness programmes for the whole family.</p>
+      </div>
+      <div>
+        <h2>Quick Links</h2>
+        <ul>
+          <li><a href="appointments.html">Book an appointment</a></li>
+          <li><a href="patients.html">Patient registration</a></li>
+          <li><a href="rooms.html">Room availability</a></li>
+          <li><a href="contact.html">Contact us</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Contact</h2>
+        <ul>
+          <li>No. 45, Duplication Road, Colombo 04</li>
+          <li>Phone: +94 11 245 6789</li>
+          <li>Email: info@lifecarewellness.lk</li>
+          <li>Mon &ndash; Fri: 7:00 AM &ndash; 9:00 PM</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container">
+        <p>&copy; <span id="year">2026</span> LifeCare Wellness Clinic. All rights reserved. Website by PixelWorks.</p>
+        <p>Academic project for HND Unit 13. LifeCare Wellness Clinic is a fictional clinic.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/script.js"></script>
+</body>
+</html>

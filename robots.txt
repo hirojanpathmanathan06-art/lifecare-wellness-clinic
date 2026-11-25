@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /login.html
+Disallow: /billing.html
+Disallow: /reception.html
+Sitemap: https://www.lifecarewellness.lk/sitemap.xml

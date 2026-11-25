@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Reception Management | LifeCare Wellness Clinic</title>
+  <meta name="description" content="Reception tools for LifeCare Wellness Clinic staff: handle admission, discharge and transfer inquiries and track patient movements.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 42 42'%3E%3Ccircle cx='21' cy='21' r='20' fill='%230d6e9e'/%3E%3Cpath d='M17 9h8v8h8v8h-8v8h-8v-8H9v-8h8z' fill='%23fff'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="logo"><svg viewBox="0 0 42 42" aria-hidden="true" focusable="false"><circle cx="21" cy="21" r="20" fill="#0d6e9e"/><path d="M17 9h8v8h8v8h-8v8h-8v-8H9v-8h8z" fill="#fff"/><circle cx="21" cy="21" r="20" fill="none" stroke="#13807a" stroke-width="2"/></svg><span>LifeCare<small>Wellness Clinic</small></span></a>
+      <button type="button" class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="mainNav">Menu</button>
+      <nav class="main-nav" id="mainNav" aria-label="Main menu">
+        <ul><li><a href="index.html">Home</a></li><li><a href="patients.html">Patients</a></li><li><a href="appointments.html">Appointments</a></li><li><a href="rooms.html">Rooms</a></li><li><a href="billing.html">Billing</a></li><li><a href="reception.html" class="active" aria-current="page">Reception</a></li><li><a href="contact.html">Contact</a></li><li><a href="login.html" class="nav-login" id="navLogin">Staff Login</a></li></ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+<section class="page-banner"><div class="container"><p class="breadcrumb"><a href="index.html">Home</a> / Reception Management</p><h1>Reception Management</h1><p>Handle inquiries about admissions, discharge summaries and transfers, and track where patients are in the clinic.</p></div></section>
+
+    <section class="section">
+      <div class="container">
+        <div class="lock-box guest-only"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg><p><strong>Staff only.</strong> The reception desk tools show patient information. Please <a href="login.html">log in with a staff account</a> to continue.</p></div>
+        <div class="staff-only">
+          <div class="summary">
+            <div class="summary-box"><p class="label">Patients in the clinic now</p><p class="value" id="sumInClinic">0</p></div>
+            <div class="summary-box"><p class="label">Open inquiries</p><p class="value" id="sumOpen">0</p></div>
+            <div class="summary-box"><p class="label">Movements recorded today</p><p class="value" id="sumMoves">0</p></div>
+          </div>
+          <div class="two-col even">
+            <div class="panel">
+              <h2>Log a Patient Inquiry</h2>
+              <form id="inquiryForm" novalidate>
+                <div class="form-row"><div class="form-group"><label for="qName">Caller / patient name <span class="required" aria-hidden="true">*</span></label><input type="text" id="qName" name="qName" required aria-describedby="qNameError"><span class="error-text" id="qNameError"></span></div><div class="form-group"><label for="qPhone">Phone number</label><input type="tel" id="qPhone" name="qPhone" aria-describedby="qPhoneError" placeholder="0771234567"><span class="error-text" id="qPhoneError"></span></div></div>
+                <div class="form-group"><label for="qType">Inquiry type <span class="required" aria-hidden="true">*</span></label><select id="qType" name="qType" required aria-describedby="qTypeError"><option value="">Select</option><option>Admission</option><option>Discharge summary</option><option>Transfer</option><option>Appointment</option><option>Billing</option><option>Other</option></select><span class="error-text" id="qTypeError"></span></div>
+                <div class="form-group"><label for="qDetails">Details <span class="required" aria-hidden="true">*</span></label><textarea id="qDetails" name="qDetails" required aria-describedby="qDetailsError"></textarea><span class="error-text" id="qDetailsError"></span></div>
+                <button type="submit" class="btn">Log Inquiry</button>
+                <p id="inquiryMsg" class="message" role="status" aria-live="polite"></p>
+              </form>
+            </div>
+            <div class="panel">
+              <h2>Update Patient Location</h2>
+              <form id="moveForm" novalidate>
+                <div class="form-group"><label for="mPatient">Patient <span class="required" aria-hidden="true">*</span></label><select id="mPatient" name="mPatient" required aria-describedby="mPatientError"><option value="">Select a patient</option></select><span class="error-text" id="mPatientError"></span></div>
+                <div class="form-group"><label for="mLocation">Moved to <span class="required" aria-hidden="true">*</span></label><select id="mLocation" name="mLocation" required aria-describedby="mLocationError"><option value="">Select a location</option></select><span class="error-text" id="mLocationError"></span></div>
+                <div class="form-group"><label for="mNote">Note</label><input type="text" id="mNote" name="mNote" aria-describedby="mNoteError" placeholder="e.g. Blood test, waiting for results"><span class="error-text" id="mNoteError"></span></div>
+                <button type="submit" class="btn">Update Location</button>
+                <p id="moveMsg" class="message" role="status" aria-live="polite"></p>
+              </form>
+            </div>
+          </div>
+
+          <h2 style="margin-top:30px">Patient Inquiries</h2>
+          <div class="table-wrap">
+            <table class="data-table" id="inquiryTable">
+              <thead><tr><th>Ref</th><th>Received</th><th>Name</th><th>Type</th><th>Details</th><th>Status</th><th>Action</th></tr></thead>
+              <tbody></tbody>
+            </table>
+          </div>
+
+          <h2 style="margin-top:30px">Where Are Our Patients?</h2>
+          <div class="table-wrap">
+            <table class="data-table" id="locationTable">
+              <thead><tr><th>ID</th><th>Patient</th><th>Current location</th><th>Status</th><th>Last updated</th><th>Note</th></tr></thead>
+              <tbody></tbody>
+            </table>
+          </div>
+
+          <h3 style="margin-top:24px">Recent Movements</h3>
+          <div class="table-wrap">
+            <table class="data-table" id="historyTable">
+              <thead><tr><th>Time</th><th>Patient</th><th>Location</th><th>Note</th></tr></thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div>
+        <h2>LifeCare Wellness Clinic</h2>
+        <p>A private medical clinic offering general check-ups, specialist consultations and wellness programmes for the whole family.</p>
+      </div>
+      <div>
+        <h2>Quick Links</h2>
+        <ul>
+          <li><a href="appointments.html">Book an appointment</a></li>
+          <li><a href="patients.html">Patient registration</a></li>
+          <li><a href="rooms.html">Room availability</a></li>
+          <li><a href="contact.html">Contact us</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Contact</h2>
+        <ul>
+          <li>No. 45, Duplication Road, Colombo 04</li>
+          <li>Phone: +94 11 245 6789</li>
+          <li>Email: info@lifecarewellness.lk</li>
+          <li>Mon &ndash; Fri: 7:00 AM &ndash; 9:00 PM</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container">
+        <p>&copy; <span id="year">2026</span> LifeCare Wellness Clinic. All rights reserved. Website by PixelWorks.</p>
+        <p>Academic project for HND Unit 13. LifeCare Wellness Clinic is a fictional clinic.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
